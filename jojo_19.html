@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 19th Birthday Jojo ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            /* Latar belakang warna krem/soft pink estetik */
+            background: linear-gradient(135deg, #fef6f0, #fce4ec, #f8bbd0);
+            overflow: hidden;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Kanvas untuk hujan emoji */
+        #emojiCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none; /* Biar tetap bisa diklik card-nya */
+        }
+
+        /* Kartu putih di tengah (Card Container) */
+        .card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 420px;
+            padding: 35px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Indikator Slide */
+        .slide-badge {
+            display: inline-block;
+            background: #fce4ec;
+            color: #d81b60;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Ikon / Emoji Hiasan */
+        .icon-top {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        /* Judul Kartu */
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+        }
+
+        /* Kotak Pesan Garis Putus-putus */
+        .message-box {
+            border: 2px dashed #f8bbd0;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            color: #555555;
+            font-size: 15px;
+            line-height: 1.6;
+            background: #fff9fb;
+        }
+
+        /* Tombol Lanjut */
+        .btn-next {
+            background-color: #8d6e63; /* Warna cokelat estetik ala referensi */
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.3);
+        }
+
+        .btn-next:hover {
+            background-color: #6d4c41;
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="emojiCanvas"></canvas>
+
+    <div class="card" id="cardContainer">
+        <!-- Konten card akan di-generate lewat JavaScript -->
+    </div>
+
+    <script>
+        // Efek Hujan Emoji di Background
+        const canvas = document.getElementById('emojiCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const emojis = ['✨', '🤍', '🌿', '⭐', '💫'];
+        const rainElements = [];
+        const numRain = 35;
+
+        for (let i = 0; i < numRain; i++) {
+            rainElements.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                speed: Math.random() * 1.5 + 0.5,
+                size: Math.random() * 16 + 12,
+                char: emojis[Math.floor(Math.random() * emojis.length)]
+            });
+        }
+
+        function animateRain() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            rainElements.forEach(item => {
+                ctx.font = `${item.size}px sans-serif`;
+                ctx.fillText(item.char, item.x, item.y);
+
+                item.y += item.speed;
+                if (item.y > canvas.height + 20) {
+                    item.y = -20;
+                    item.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(animateRain);
+        }
+        animateRain();
+
+        // Data isi setiap slide untuk Ulang Tahun Jojo ke-19
+        const slides = [
+            {
+                slideNum: "SLIDE 1 DARI 5 🤍✨",
+                icon: "✨",
+                title: "Happy 19th Birthday, Jojo!",
+                text: "Halo! Selamat datang di sedikit kejutan kecil khusus buat hari spesial kamu hari ini. Semoga hal-hal baik selalu menyertai ya!"
+            },
+            {
+                slideNum: "SLIDE 2 DARI 5 🤍🌿",
+                icon: "🌿",
+                title: "Doa & Harapan Baik",
+                text: "Semoga di umur yang ke-19 ini, kamu diberikan kesehatan, kelancaran di setiap urusan, dan dijauhkan dari hal-hal yang bikin stres."
+            },
+            {
+                slideNum: "SLIDE 3 DARI 5 💼✨",
+                icon: "💼",
+                title: "Semangat Sekolah & Kerjanya",
+                text: "Hebat banget di usia sekarang sudah bisa bagi waktu antara sekolah dan kerja. Semoga urusan sekolah dan pekerjaanmu selalu dipermudah dan sukses terus!"
+            },
+            {
+                slideNum: "SLIDE 4 DARI 5 ☕🤍",
+                icon: "☕",
+                title: "Jangan Lupa Istirahat",
+                text: "Di tengah kesibukan sekolah dan kerja yang padat, jangan lupa buat tetap luangkan waktu istirahat yang cukup ya. Tetap jadi pribadi yang keren!"
+            },
+            {
+                slideNum: "SLIDE 5 DARI 5 🎉✨",
+                icon: "🎉",
+                title: "Have a Great Year Ahead!",
+                text: "Sekali lagi, selamat ulang tahun yang ke-19 ya, Jojo! Nikmati hari spesialmu sebaik mungkin. You got this! 🤍"
+            }
+        ];
+
+        let currentSlide = 0;
+        const cardContainer = document.getElementById('cardContainer');
+
+        function renderSlide(index) {
+            const data = slides[index];
+            const isLast = index === slides.length - 1;
+            
+            cardContainer.innerHTML = `
+                <div class="slide-badge">${data.slideNum}</div>
+                <div class="icon-top">${data.icon}</div>
+                <div class="card-title">${data.title}</div>
+                <div class="message-box">
+                    <p>${data.text}</p>
+                </div>
+                <button class="btn-next" onclick="nextSlide()">
+                    ${isLast ? "Selesai 🤍" : "Lanjut Baca &rarr;"}
+                </button>
+            `;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide < slides.length) {
+                renderSlide(currentSlide);
+            } else {
+                currentSlide = 0;
+                renderSlide(currentSlide);
+            }
+        }
+
+        // Render slide pertama saat halaman dibuka
+        renderSlide(0);
+    </script>
+</body>
+</html>
